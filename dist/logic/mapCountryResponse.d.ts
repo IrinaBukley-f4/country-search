@@ -11,7 +11,10 @@ interface RawCountry {
     }[];
     area?: number;
     borders?: string[];
-    currencies?: unknown[];
+    currencies?: {
+        name?: string;
+        code?: string;
+    }[];
 }
 export interface Country {
     name: string;
