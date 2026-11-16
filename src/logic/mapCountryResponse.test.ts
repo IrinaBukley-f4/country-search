@@ -4,12 +4,15 @@ import { mapCountryResponse } from './mapCountryResponse';
 describe('mapCountryResponse', () => {
   it('правильно маппит сырой ответ API в данные для карточки', () => {
     const rawApiData = {
-      name: { common: 'Spain', official: 'Kingdom of Spain' },
-      flags: { svg: 'https://flagcdn.com/es.svg', png: 'https://flagcdn.com/w320/es.png' },
+      name: 'Spain', // Теперь строка!
+      flags: { svg: 'https://flagcdn.com/es.svg' },
       capital: ['Madrid'],
       region: 'Europe',
       population: 47351567,
       languages: [{ name: 'Spanish' }],
+      area: 505990,
+      borders: ['AND', 'FRA', 'GIB', 'PRT', 'MAR'],
+      currencies: [{ name: 'Euro', code: 'EUR' }],
     };
 
     const result = mapCountryResponse(rawApiData);
@@ -21,12 +24,15 @@ describe('mapCountryResponse', () => {
       region: 'Europe',
       population: 47351567,
       languages: ['Spanish'],
+      area: 505990,
+      borders: ['AND', 'FRA', 'GIB', 'PRT', 'MAR'],
+      currencies: ['Euro'],
     });
   });
 
   it('корректно обрабатывает отсутствие столицы или языков', () => {
     const rawApiData = {
-      name: { common: 'Antarctica' },
+      name: 'Antarctica',
       flags: { svg: 'https://flagcdn.com/aq.svg' },
       capital: [],
       region: 'Antarctic',
@@ -38,5 +44,8 @@ describe('mapCountryResponse', () => {
 
     expect(result.capital).toBe('Нет данных');
     expect(result.languages).toEqual([]);
+    expect(result.area).toBe(0);
+    expect(result.borders).toEqual([]);
+    expect(result.currencies).toEqual([]);
   });
 });

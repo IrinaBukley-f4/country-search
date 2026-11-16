@@ -41,7 +41,17 @@ describe('Логика гонки и обработки ошибок', () => {
             resolve({
               ok: true,
               status: 200,
-              json: async () => [{ name: { common: 'Spain (New)' } }],
+              // Исправлено на строку
+              json: async () => [
+                {
+                  name: 'Spain (New)',
+                  flags: { svg: '' },
+                  languages: [],
+                  capital: [],
+                  region: '',
+                  population: 0,
+                },
+              ],
             });
         }
       });
@@ -50,16 +60,17 @@ describe('Логика гонки и обработки ошибок', () => {
     const controller1 = new AbortController();
     const promise1 = searchCountries('sp', controller1.signal);
 
+    promise1.catch(() => {});
+
     const controller2 = new AbortController();
     const promise2 = searchCountries('spain', controller2.signal);
 
     await new Promise(process.nextTick);
 
     controller1.abort();
-
     resolveSecond!();
-    const result2 = await promise2;
 
+    const result2 = await promise2;
     expect(result2[0].name).toBe('Spain (New)');
 
     await expect(promise1).rejects.toMatchObject({ name: 'AbortError' });

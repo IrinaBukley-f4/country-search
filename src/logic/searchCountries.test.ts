@@ -3,12 +3,15 @@ import { searchCountries, HttpError } from './searchCountries';
 
 const mockSuccessResponse = [
   {
-    name: { common: 'Spain' },
+    name: 'Spain',
     flags: { svg: 'https://flagcdn.com/es.svg' },
     capital: ['Madrid'],
     region: 'Europe',
     population: 47351567,
     languages: [{ name: 'Spanish' }],
+    area: 505990,
+    borders: ['AND', 'FRA', 'GIB', 'PRT', 'MAR'],
+    currencies: [{ name: 'Euro', code: 'EUR' }],
   },
 ];
 

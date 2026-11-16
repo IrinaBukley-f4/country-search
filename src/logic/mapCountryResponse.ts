@@ -26,7 +26,7 @@ export function mapCountryResponse(raw: RawCountry): Country {
   return {
     name: raw.name || 'Неизвестно',
     flag: raw.flags?.svg || '',
-    capital: Array.isArray(raw.capital) ? raw.capital[0] : raw.capital || 'Нет данных',
+    capital: (Array.isArray(raw.capital) ? raw.capital[0] : raw.capital) || 'Нет данных',
     region: raw.region || 'Неизвестно',
     population: raw.population || 0,
     languages: Array.isArray(raw.languages) ? raw.languages.map((lang) => lang.name) : [],
