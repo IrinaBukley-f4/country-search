@@ -1,0 +1,44 @@
+{
+  "name": "country-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IrinaBukley-f4/country-search.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IrinaBukley-f4/country-search/issues"
+  },
+  "homepage": "https://github.com/IrinaBukley-f4/country-search#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.6",
+    "eslint": "^10.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.10.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.2",
+    "vitest": "^5.1.0"
+  }
+}
