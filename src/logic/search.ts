@@ -1,6 +1,6 @@
-import { searchCountries } from '../logic/searchCountries';
-import { Country } from '../logic/mapCountryResponse';
-import { debounce } from '../logic/debounce';
+import { searchCountries } from '../logic/searchCountries.js';
+import { Country } from '../logic/mapCountryResponse.js';
+import { debounce } from '../logic/debounce.js';
 
 export type SearchState =
   | { status: 'idle' }
@@ -31,7 +31,7 @@ export class SearchController {
     this.lastQuery = trimmedQuery;
 
     this.controller = new AbortController();
-    this.debouncedSearch(trimmedQuery, this.controller.signal);
+    this.debouncedSearch(trimmedQuery, this.controller!.signal);
   }
 
   private debouncedSearch = debounce(async (query: string, signal: AbortSignal) => {

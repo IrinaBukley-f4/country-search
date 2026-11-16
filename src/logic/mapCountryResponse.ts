@@ -1,10 +1,13 @@
 interface RawCountry {
-  name: { common: string };
+  name: string;
   flags: { svg: string };
   capital?: string[];
   region?: string;
   population?: number;
-  languages?: { name: string }[];
+  languages: { name: string }[];
+  area?: number;
+  borders?: string[];
+  currencies?: { name?: string; code?: string }[];
 }
 
 export interface Country {
@@ -14,15 +17,25 @@ export interface Country {
   region: string;
   population: number;
   languages: string[];
+  area: number;
+  borders: string[];
+  currencies: string[];
 }
 
 export function mapCountryResponse(raw: RawCountry): Country {
   return {
-    name: raw.name?.common || 'Неизвестно',
+    name: raw.name || 'Неизвестно',
     flag: raw.flags?.svg || '',
-    capital: raw.capital && raw.capital.length > 0 ? raw.capital[0] : 'Нет данных',
+    capital: Array.isArray(raw.capital) ? raw.capital[0] : raw.capital || 'Нет данных',
     region: raw.region || 'Неизвестно',
     population: raw.population || 0,
-    languages: raw.languages ? raw.languages.map((lang) => lang.name) : [],
+    languages: Array.isArray(raw.languages) ? raw.languages.map((lang) => lang.name) : [],
+    area: raw.area || 0,
+    borders: raw.borders || [],
+    currencies: Array.isArray(raw.currencies)
+      ? raw.currencies
+          .map((c) => c.name || c.code)
+          .filter((c): c is string => typeof c === 'string') // <-- магия здесь
+      : [],
   };
 }

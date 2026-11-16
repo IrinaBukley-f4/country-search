@@ -1,4 +1,4 @@
-import { mapCountryResponse, Country } from './mapCountryResponse';
+import { mapCountryResponse, Country } from './mapCountryResponse.js';
 
 export class HttpError extends Error {
   constructor(public status: number) {
