@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Search</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+    .search-input { width: 100%; padding: 10px; font-size: 18px; margin-bottom: 10px; }
+    .loading { color: #666; display: none; }
+    .error-message { color: red; background: #ffe6e6; padding: 10px; border-radius: 5px; margin-bottom: 10px; display: none; }
+    .no-results { color: #666; display: none; }
+    .card-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+    .card { border: 1px solid #ccc; padding: 10px; border-radius: 8px; cursor: pointer; }
+    .card img { width: 50px; height: auto; display: block; margin-bottom: 5px; }
+    .card h3 { margin: 0 0 5px; font-size: 16px; }
+    .card p { margin: 2px 0; font-size: 14px; color: #555; }
+    .detail-view { display: none; padding: 20px; border: 1px solid #ccc; border-radius: 8px; margin-top: 20px; background: #f9f9f9; }
+    .back-btn { margin-bottom: 15px; cursor: pointer; }
+    .retry-btn { margin-top: 10px; padding: 5px 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <input type="text" id="search-input" class="search-input" placeholder="Поиск страны..." autocomplete="off">
+  
+  <div id="loading" class="loading">Загрузка...</div>
+
+  <div id="error-container" class="error-message">
+    <span id="error-text"></span>
+    <button id="retry-btn" class="retry-btn">Повторить</button>
+  </div>
+
+  <div id="no-results" class="no-results">Ничего не найдено</div>
+
+  <div id="results-list" class="card-list"></div>
+
+  <div id="detail-view" class="detail-view">
+    <button id="back-btn" class="back-btn">← Назад к поиску</button>
+    <div id="detail-content"></div>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
